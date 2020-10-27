@@ -3,14 +3,14 @@ package com.example.products.model.MyViewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.products.model.ProductsDB
-import com.example.products.model.ProductsEntityItem
-import com.example.products.model.Repository
+import com.example.products.model.room.ProductsDB
+import com.example.products.model.room.ProductsItem
+import com.example.products.model.MyRepository.Repository
 
 class ProductsViewModel(application: Application): AndroidViewModel(application) {
 
     private val mRepository: Repository
-    val mAllProducts: LiveData<List<ProductsEntityItem>>
+    val mAllProducts: LiveData<List<ProductsItem>>
 
     init {
         val mProductsDao = ProductsDB.getProductsDataBase(application).getProductsDao()
@@ -20,19 +20,19 @@ class ProductsViewModel(application: Application): AndroidViewModel(application)
 
     }
 
-    fun getOneID(id: String): LiveData<ProductsEntityItem> {
+    fun getOneID(id: String): LiveData<ProductsItem> {
         return mRepository.getOneById(id)
     }
 
-    fun getOneImage(image: String): LiveData<ProductsEntityItem> {
+    fun getOneImage(image: String): LiveData<ProductsItem> {
         return mRepository.getOneByImage(image)
     }
 
-    fun getOneName(name: String): LiveData<ProductsEntityItem> {
+    fun getOneName(name: String): LiveData<ProductsItem> {
         return mRepository.getOneByName(name)
     }
 
-    fun getOnePrice(price: String): LiveData<ProductsEntityItem> {
+    fun getOnePrice(price: String): LiveData<ProductsItem> {
         return mRepository.getOneByPrice(price)
     }
 }

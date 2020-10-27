@@ -1,4 +1,4 @@
-package com.example.products
+package com.example.products.model.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.products.R
 import com.example.products.model.MyViewModel.ProductsViewModel
-import com.example.products.model.ProductsAdapter
-import com.example.products.model.ProductsEntityItem
+import com.example.products.model.MyViewModel.ProductsAdapter
+import com.example.products.model.room.ProductsItem
 import kotlinx.android.synthetic.main.fragment_first.*
 
 
@@ -50,7 +50,7 @@ open class FirstFragment : Fragment(), ProductsAdapter.Products {
 
     }
 
-    override fun passProdcuts(mProducts: ProductsEntityItem) {
+    override fun passProdcuts(mProducts: ProductsItem) {
         val mBundle = Bundle()
         mBundle.putInt("id", mProducts.id)
         mBundle.putString("imagen", mProducts.image)

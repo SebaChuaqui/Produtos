@@ -1,8 +1,11 @@
-package com.example.products.model
+package com.example.products.model.MyRepository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.products.model.network.RetrofitClient
+import com.example.products.model.retorfit.Products
+import com.example.products.model.retorfit.RetrofitClient
+import com.example.products.model.room.ProductsDao
+import com.example.products.model.room.ProductsItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,15 +18,15 @@ class Repository(private val mProductsDao: ProductsDao) {
     private val service = RetrofitClient.getRetrofitClient()
 
     val mProductos = mProductsDao.getAllProductsFromDB()
-    val mDataProductsDBList = mutableListOf<ProductsEntity>()
+    val mDataProductsDBList = mutableListOf<Products>()
 
     fun getProductsFromServer() {
 
         val mCall = service.fecthAllProducts()
-        mCall.enqueue(object : Callback<List<ProductsEntityItem>> {
+        mCall.enqueue(object : Callback<List<ProductsItem>> {
             override fun onResponse(
-                call: Call<List<ProductsEntityItem>>,
-                response: Response<List<ProductsEntityItem>>
+                call: Call<List<ProductsItem>>,
+                response: Response<List<ProductsItem>>
             ) {
                 Log.d("Prueba", response.body().toString())
                 when (response.code()) {
@@ -41,7 +44,7 @@ class Repository(private val mProductsDao: ProductsDao) {
                 }
             }
 
-            override fun onFailure(call: Call<List<ProductsEntityItem>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ProductsItem>>, t: Throwable) {
                 Log.d("error", t.message.toString())
             }
 
@@ -49,19 +52,19 @@ class Repository(private val mProductsDao: ProductsDao) {
 
     }
 
-    fun getOneById(id: String): LiveData<ProductsEntityItem> {
+    fun getOneById(id: String): LiveData<ProductsItem> {
         return mProductsDao.getCodigoByID(id)
     }
 
-    fun getOneByImage(image: String): LiveData<ProductsEntityItem> {
+    fun getOneByImage(image: String): LiveData<ProductsItem> {
         return mProductsDao.getImageByID(image)
     }
 
-    fun getOneByName(name: String): LiveData<ProductsEntityItem> {
+    fun getOneByName(name: String): LiveData<ProductsItem> {
         return mProductsDao.getNameByID(name)
     }
 
-    fun getOneByPrice(price: String): LiveData<ProductsEntityItem>{
+    fun getOneByPrice(price: String): LiveData<ProductsItem>{
         return mProductsDao.getPriceByID(price)
     }
 }
