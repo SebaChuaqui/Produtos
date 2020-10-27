@@ -22,10 +22,10 @@ class ProductsAdapter(var mPassProducts: FirstFragment): RecyclerView.Adapter<Pr
 
     inner class TaskWieHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
-        val mid = itemView.tv_id
+
         val mimage = itemView.imageProducts
-        val mNombre = itemView.Nombre
-        val mPrecio = itemView.Precio
+        val mNombre = itemView.Name
+        val mPrecio = itemView.Price
         val itemView = itemView.setOnClickListener(this)
 
         override fun onClick(p0: View?) {

@@ -17,19 +17,20 @@ import com.example.products.model.room.ProductsItem
 import kotlinx.android.synthetic.main.fragment_first.*
 
 
-open class FirstFragment : Fragment(), ProductsAdapter.Products {
+class FirstFragment : Fragment(), ProductsAdapter.Products {
 
     lateinit var mProductsViewModel: ProductsViewModel
+    lateinit var mAdapter: ProductsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         mProductsViewModel = ViewModelProvider(this).get(ProductsViewModel::class.java)
+        mAdapter = ProductsAdapter(this)
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false)
@@ -38,23 +39,28 @@ open class FirstFragment : Fragment(), ProductsAdapter.Products {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mRecycleView = recyclerView
-        val mProductsAdapter = ProductsAdapter(this)
-        mRecycleView.adapter = mProductsAdapter
-        mRecycleView.layoutManager = LinearLayoutManager(context)
+        val mProductsRecyclerView = recyclerView
 
-        mProductsViewModel.mAllProducts.observe(viewLifecycleOwner, Observer{
-            mProductsAdapter.updateListProducts(it)
-            Log.d("funciona", it.toString())
+        recyclerView.adapter = mAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        mProductsViewModel.mAllProducts.observe(viewLifecycleOwner, Observer {
+            mAdapter.updateListProducts(it)
         })
 
+        //view.findViewById<Button>(R.id.button_first).setOnClickListener {
+
+        // }
     }
+
 
     override fun passProdcuts(mProducts: ProductsItem) {
         val mBundle = Bundle()
         mBundle.putInt("id", mProducts.id)
-        mBundle.putString("imagen", mProducts.image)
-        mBundle.putInt("precio", mProducts.price)
+        mBundle.putString("name", mProducts.name)
+        mBundle.putInt("price", mProducts.price)
+        mBundle.putString("image", mProducts.image )
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, mBundle)
     }
+
 }

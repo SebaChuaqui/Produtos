@@ -9,37 +9,29 @@
         android:id="@+id/imageProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/Nombre"
+        android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="68dp"
         android:text="Producto"
-        app:layout_constraintEnd_toEndOf="@+id/imageProducts"
+        app:layout_constraintStart_toStartOf="@+id/imageProducts"
         app:layout_constraintTop_toBottomOf="@+id/imageProducts" />
 
     <TextView
-        android:id="@+id/Precio"
-        android:layout_width="wrap_content"
+        android:id="@+id/Price"
+        android:layout_width="61dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="69dp"
         android:text="Price"
-        app:layout_constraintStart_toStartOf="@+id/Nombre"
-        app:layout_constraintTop_toBottomOf="@+id/Nombre" />
-
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/Name"
+        app:layout_constraintTop_toBottomOf="@+id/Name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
